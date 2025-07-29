@@ -1,4 +1,4 @@
-import { GoogleGenerativeAI } from '@google/generai';
+import { GoogleGenerativeAI } from '@google/generative-ai';
 
 // IMPORTANT: This is the standard way to handle API keys in serverless environments.
 // The API key is stored as an environment variable, NOT in the code.
