@@ -20,7 +20,8 @@ export default async (req, res) => {
   }
 
   try {
-    const { query, context } = await req.json();
+    // Access the body directly from req, as Vercel parses it for us
+  const { query, context } = req.body;
 
     if (!query) {
       return res.status(400).json({ error: 'Query is required' });
