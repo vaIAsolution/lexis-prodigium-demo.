@@ -40,4 +40,9 @@ export default async (req, res) => {
     console.error('Error processing request:', error);
     res.status(500).json({ error: 'Failed to process AI request.' });
   }
+  } catch (error) {
+    console.error('Global error processing request:', error); // More specific log
+    // Ensure this always returns JSON
+    res.status(500).json({ error: 'An unexpected server error occurred.', details: error.message });
+  }
 };
