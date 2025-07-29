@@ -2,7 +2,14 @@ import { GoogleGenerativeAI } from '@google/generai';
 
 // IMPORTANT: This is the standard way to handle API keys in serverless environments.
 // The API key is stored as an environment variable, NOT in the code.
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+const API_KEY = process.env.GEMINI_API_KEY;
+
+  if (!API_KEY) {
+    console.error('GEMINI_API_KEY is not set in environment variables.');
+    return res.status(500).json({ error: 'Server configuration error: API Key is missing.' });
+  }
+
+  const genAI = new GoogleGenerativeAI(API_KEY);
 
 export default async (req, res) => {
   if (req.method !== 'POST') {
