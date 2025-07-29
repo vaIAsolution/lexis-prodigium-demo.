@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LEXIS PRODIGIUM - Demo</title>
+    <title>LEXIS PRODIGIUM - Demo en Vivo</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,43 +13,23 @@
             theme: {
                 extend: {
                     colors: {
-                        'brand-blue': {
-                            '50': '#f0f8ff',
-                            '100': '#e0f0fe',
-                            '200': '#c2e3fd',
-                            '300': '#a3d5fc',
-                            '400': '#85c8fb',
-                            '500': '#67baf9',
-                            '600': '#48ad_f8',
-                            '700': '#3a9ef6',
-                            '800': '#2b8ff5',
-                            '900': '#1d81f3'
-                        },
-                        'brand-gray': {
-                            '50': '#f7fafc',
-                            '100': '#edf2f7',
-                            '200': '#e2e8f0',
-                            '300': '#cbd5e0',
-                            '400': '#a0aec0',
-                            '500': '#718096',
-                            '600': '#4a5568',
-                            '700': '#2d3748',
-                            '800': '#1a202c',
-                            '900': '#111827'
-                        }
+                        'brand-blue': { '50': '#f0f8ff', '100': '#e0f0fe', '200': '#c2e3fd', '300': '#a3d5fc', '400': '#85c8fb', '500': '#67baf9', '600': '#48adf8', '700': '#3a9ef6', '800': '#2b8ff5', '900': '#1d81f3' },
+                        'brand-gray': { '50': '#f7fafc', '100': '#edf2f7', '200': '#e2e8f0', '300': '#cbd5e0', '400': '#a0aec0', '500': '#718096', '600': '#4a5568', '700': '#2d3748', '800': '#1a202c', '900': '#111827' }
                     },
-                    fontFamily: {
-                        'sans': ['Montserrat', 'sans-serif'],
-                        'serif': ['Lora', 'serif'],
-                        'body': ['Lato', 'sans-serif'],
-                    }
+                    fontFamily: { 'sans': ['Montserrat', 'sans-serif'], 'serif': ['Lora', 'serif'], 'body': ['Lato', 'sans-serif'] }
                 }
             }
         }
     </script>
     <style>
-        .demo-section { display: none; }
+        .demo-section { display: none; } 
         .demo-section.active { display: block; }
+        .prose { max-width: 100%; }
+        .prose h1, .prose h2, .prose h3 { font-family: 'Montserrat', sans-serif; color: #1a202c; }
+        .prose p { font-family: 'Lato', sans-serif; line-height: 1.7; }
+        .prose strong { font-weight: 700; }
+        .prose ul { list-style-type: disc; padding-left: 1.5rem; }
+        .prose li { margin-bottom: 0.5rem; }
     </style>
 </head>
 <body class="bg-brand-gray-100 font-body text-brand-gray-800">
@@ -61,87 +41,60 @@
             </div>
             <nav id="main-nav" class="space-y-2">
                 <a href="#" data-demo="vigilancia" class="nav-item active flex items-center px-4 py-2 rounded-md hover:bg-brand-gray-700">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m12 16-4-4 1.5-1.5 2.5 2.5 5-5L18.5 9l-6.5 6.5z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3"><path d="M21 6.5c-1.2 1.2-2.8 2-4.5 2S13.2 7.7 12 6.5c-1.2 1.2-2.8 2-4.5 2S4.2 7.7 3 6.5m18 6c-1.2 1.2-2.8 2-4.5 2s-3.3-.8-4.5-2c-1.2 1.2-2.8 2-4.5 2s-3.3-.8-4.5-2m18 6c-1.2 1.2-2.8 2-4.5 2s-3.3-.8-4.5-2c-1.2 1.2-2.8 2-4.5 2s-3.3-.8-4.5-2"></path></svg>
                     Vigilancia Judicial
                 </a>
                 <a href="#" data-demo="strategy" class="nav-item flex items-center px-4 py-2 rounded-md hover:bg-brand-gray-700">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 8v8m-4-4h8"/></svg>
+                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 8v8m-4-4h8"/></svg>
                     Análisis de Estrategia
                 </a>
                  <a href="#" data-demo="document" class="nav-item flex items-center px-4 py-2 rounded-md hover:bg-brand-gray-700">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
                     Generador de Escritos
                 </a>
             </nav>
-            <div class="pt-4 border-t border-brand-gray-700 text-center">
-                <p class="text-sm text-brand-gray-400">Usos de Demo Restantes</p>
-                <p class="text-2xl font-bold">5</p>
-            </div>
         </aside>
 
         <!-- Main Content -->
         <div class="flex-1 flex flex-col overflow-hidden">
-            <!-- Header -->
             <header class="bg-white shadow-md p-4 flex justify-between items-center">
                  <button id="menu-btn" class="sm:hidden text-brand-gray-600 hover:text-brand-gray-900">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
                 </button>
                 <div class="flex items-center space-x-4">
-                    <span class="font-semibold px-3 py-1 bg-yellow-200 text-yellow-800 rounded-full text-sm">VERSIÓN DE DEMO</span>
+                    <span class="font-semibold px-3 py-1 bg-green-200 text-green-800 rounded-full text-sm">DEMO EN VIVO</span>
                 </div>
             </header>
 
-            <!-- Content Area -->
             <main class="flex-1 overflow-x-hidden overflow-y-auto bg-brand-gray-100 p-6">
                 
+                <!-- Universal Result/Spinner Container -->
+                <div id="result-container" class="max-w-4xl mx-auto hidden">
+                    <div id="spinner" class="flex justify-center items-center p-10">
+                        <svg class="animate-spin -ml-1 mr-3 h-10 w-10 text-brand-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        <span class="text-xl text-brand-gray-700">Consultando a la IA...</span>
+                    </div>
+                    <div id="error-message" class="hidden bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-md" role="alert">
+                        <p class="font-bold">Error</p>
+                        <p id="error-text"></p>
+                    </div>
+                    <div id="result-content" class="hidden bg-white p-6 rounded-lg shadow-lg prose"></div>
+                </div>
+
                 <!-- Vigilancia Judicial Demo -->
                 <section id="demo-vigilancia" class="demo-section active">
                     <div class="max-w-4xl mx-auto">
-                        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-                            <div class="p-6 border-b">
-                                <h2 class="text-2xl font-bold text-brand-gray-800 font-sans">Vigilancia de Criterios Judiciales</h2>
-                                <p class="text-brand-gray-600 mt-1">Monitoree nuevas tesis y jurisprudencia relevantes para sus casos.</p>
-                            </div>
+                        <div class="bg-white shadow-lg rounded-lg">
+                            <div class="p-6 border-b"><h2 class="text-2xl font-bold text-brand-gray-800 font-sans">Vigilancia de Criterios Judiciales</h2><p class="text-brand-gray-600 mt-1">Buscar tesis, jurisprudencia y actualizaciones relevantes.</p></div>
                             <div class="p-6">
                                 <div class="mb-4">
-                                    <label for="vigilancia-query" class="block text-sm font-bold text-brand-gray-700 mb-2">Términos de Búsqueda</label>
-                                    <input type="text" id="vigilancia-query" value="caducidad de la instancia jalisco" class="w-full px-3 py-2 border border-brand-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-blue-500" placeholder="Ej: amparo fiscal, divorcio incausado...">
+                                    <label for="vigilancia-query" class="block text-sm font-bold text-brand-gray-700 mb-2">¿Qué desea buscar en el Semanario Judicial?</label>
+                                    <input type="text" id="vigilancia-query" class="w-full px-3 py-2 border border-brand-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-blue-500" placeholder="Ej: caducidad de la instancia jalisco, alimentos cdmx 2024">
                                 </div>
-                                <button id="run-vigilancia" class="w-full bg-brand-blue-600 text-white font-bold py-2 px-4 rounded-md hover:bg-brand-blue-700 transition duration-300">
-                                    Iniciar Búsqueda
-                                </button>
-                            </div>
-                            <div id="vigilancia-result-container" class="p-6 bg-brand-gray-50 hidden">
-                                <!-- Spinner -->
-                                <div id="vigilancia-spinner" class="flex justify-center items-center">
-                                    <svg class="animate-spin -ml-1 mr-3 h-8 w-8 text-brand-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                    </svg>
-                                    <span class="text-lg text-brand-gray-700">Buscando en el Semanario Judicial...</span>
-                                </div>
-                                <!-- Result -->
-                                <div id="vigilancia-result-content" class="hidden">
-                                    <h3 class="text-xl font-bold text-brand-gray-800 font-sans mb-4">Resultados de la Vigilancia</h3>
-                                    <div class="border-2 border-brand-blue-200 bg-blue-50 rounded-lg p-4">
-                                        <h4 class="font-bold text-lg text-brand-blue-900">CADUCIDAD DE LA INSTANCIA EN LOS JUICIOS CIVILES (LEGISLACIÓN DEL ESTADO DE JALISCO).</h4>
-                                        <div class="flex space-x-4 text-sm text-brand-gray-600 my-2">
-                                            <span><span class="font-bold">Registro:</span> 2028924</span>
-                                            <span><span class="font-bold">Época:</span> Undécima Época</span>
-                                            <span><span class="font-bold">Publicación:</span> 07 de junio de 2024</span>
-                                        </div>
-                                        <p class="font-serif text-brand-gray-800 leading-relaxed mt-2">
-                                            <span class="font-bold text-brand-gray-900">Hechos:</span> Una persona promovió un juicio civil, pero presentó un escrito ante un juzgado diferente al que llevaba el caso. La parte demandada argumentó que, debido a la inactividad procesal en el juzgado correcto, la instancia había caducado.
-                                        </p>
-                                        <p class="font-serif text-brand-gray-800 leading-relaxed mt-3">
-                                            <span class="font-bold text-brand-gray-900">Criterio Jurídico:</span> El Tribunal Colegiado determinó que una promoción presentada ante un órgano judicial distinto al que conoce del juicio **no interrumpe el plazo para la caducidad de la instancia**. Esto se debe a que la parte actora tiene la carga procesal de dirigir sus promociones al juzgado correcto, y el error no es atribuible al órgano jurisdiccional.
-                                        </p>
-                                        <div class="mt-4 p-3 bg-yellow-100 border-l-4 border-yellow-500 rounded-r-lg">
-                                            <h5 class="font-bold text-yellow-800">Impacto y Relevancia Práctica:</h5>
-                                            <p class="text-sm text-yellow-900">Este criterio es crucial para litigantes en Jalisco. Refuerza la necesidad de verificar con exactitud el juzgado en el que se tramitan los asuntos para evitar la caducidad por un error administrativo del promovente. Un error en la presentación de un escrito, por simple que parezca, puede resultar en la pérdida del juicio por inactividad procesal.</p>
-                                        </div>
-                                    </div>
-                                </div>
+                                <button id="run-vigilancia" class="w-full bg-brand-blue-600 text-white font-bold py-3 px-4 rounded-md hover:bg-brand-blue-700 transition duration-300 text-lg">Buscar</button>
                             </div>
                         </div>
                     </div>
@@ -151,12 +104,13 @@
                 <section id="demo-strategy" class="demo-section">
                      <div class="max-w-4xl mx-auto">
                         <div class="bg-white shadow-lg rounded-lg">
-                            <div class="p-6 border-b">
-                                <h2 class="text-2xl font-bold text-brand-gray-800 font-sans">Análisis de Estrategia de Caso</h2>
-                                <p class="text-brand-gray-600 mt-1">Obtenga un análisis FODA (Fortalezas, Oportunidades, Debilidades, Amenazas) para su caso.</p>
-                            </div>
+                            <div class="p-6 border-b"><h2 class="text-2xl font-bold text-brand-gray-800 font-sans">Análisis de Estrategia de Caso</h2><p class="text-brand-gray-600 mt-1">Obtenga un análisis FODA para su caso.</p></div>
                             <div class="p-6">
-                                <p class="text-center text-brand-gray-500 italic">Esta sección es una demostración. El contenido se generará de forma simulada.</p>
+                                <div class="mb-4">
+                                    <label for="strategy-context" class="block text-sm font-bold text-brand-gray-700 mb-2">Resumen de los hechos y estado actual del caso:</label>
+                                    <textarea id="strategy-context" rows="8" class="w-full px-3 py-2 border border-brand-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-blue-500" placeholder="Ej: Mi cliente, Juan Pérez, fue demandado por incumplimiento de contrato de arrendamiento. La contraparte alega falta de pago de 3 meses de renta..."></textarea>
+                                </div>
+                                <button id="run-strategy" class="w-full bg-brand-blue-600 text-white font-bold py-3 px-4 rounded-md hover:bg-brand-blue-700 transition duration-300 text-lg">Analizar Estrategia</button>
                             </div>
                         </div>
                     </div>
@@ -166,12 +120,17 @@
                 <section id="demo-document" class="demo-section">
                      <div class="max-w-4xl mx-auto">
                         <div class="bg-white shadow-lg rounded-lg">
-                            <div class="p-6 border-b">
-                                <h2 class="text-2xl font-bold text-brand-gray-800 font-sans">Generador de Escritos</h2>
-                                <p class="text-brand-gray-600 mt-1">Cree borradores de demandas, contratos y otros documentos legales.</p>
-                            </div>
+                            <div class="p-6 border-b"><h2 class="text-2xl font-bold text-brand-gray-800 font-sans">Generador de Escritos</h2><p class="text-brand-gray-600 mt-1">Cree borradores de documentos legales.</p></div>
                             <div class="p-6">
-                                <p class="text-center text-brand-gray-500 italic">Esta sección es una demostración. El contenido se generará de forma simulada.</p>
+                                <div class="mb-4">
+                                    <label for="document-query" class="block text-sm font-bold text-brand-gray-700 mb-2">¿Qué documento necesita generar?</label>
+                                    <input type="text" id="document-query" class="w-full px-3 py-2 border border-brand-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-blue-500" placeholder="Ej: Demanda inicial de divorcio incausado, Contrato de prestación de servicios profesionales">
+                                </div>
+                                <div class="mb-4">
+                                    <label for="document-context" class="block text-sm font-bold text-brand-gray-700 mb-2">Proporcionar los detalles y datos clave:</label>
+                                    <textarea id="document-context" rows="8" class="w-full px-3 py-2 border border-brand-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-blue-500" placeholder="Ej: Actor: María López. Demandado: Pedro Ramírez. Fecha de matrimonio: 15/03/2010. Domicilio conyugal: Av. Siempre Viva 123, CDMX. No hay hijos..."></textarea>
+                                </div>
+                                <button id="run-document" class="w-full bg-brand-blue-600 text-white font-bold py-3 px-4 rounded-md hover:bg-brand-blue-700 transition duration-300 text-lg">Generar Documento</button>
                             </div>
                         </div>
                     </div>
@@ -183,56 +142,87 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            const API_URL = 'https://lexis-prodigium-demo.vercel.app/api/proxy';
+
             const navItems = document.querySelectorAll('.nav-item');
             const demoSections = document.querySelectorAll('.demo-section');
             const menuBtn = document.getElementById('menu-btn');
             const sidebar = document.getElementById('sidebar');
 
+            const resultContainer = document.getElementById('result-container');
+            const spinner = document.getElementById('spinner');
+            const resultcontent = document.getElementById('result-content');
+            const errorMessage = document.getElementById('error-message');
+            const errorText = document.getElementById('error-text');
+
             // Navigation
             navItems.forEach(item => {
                 item.addEventListener('click', function(e) {
                     e.preventDefault();
-                    
                     navItems.forEach(i => i.classList.remove('active', 'bg-brand-blue-600'));
                     this.classList.add('active', 'bg-brand-blue-600');
-                    
                     const demoId = this.getAttribute('data-demo');
-                    
-                    demoSections.forEach(section => {
-                        if (section.id === 'demo-' + demoId) {
-                            section.classList.add('active');
-                        } else {
-                            section.classList.remove('active');
-                        }
-                    });
+                    demoSections.forEach(section => section.id === 'demo-' + demoId ? section.classList.add('active') : section.classList.remove('active'));
+                    resultContainer.classList.add('hidden'); // Hide results on tab change
                 });
             });
 
             // Mobile menu
-            menuBtn.addEventListener('click', () => {
-                sidebar.classList.toggle('-translate-x-full');
+            menuBtn.addEventListener('click', () => sidebar.classList.toggle('-translate-x-full'));
+
+            // Generic API call function
+            async function callApi(query, context = '') {
+                resultContainer.classList.remove('hidden');
+                spinner.classList.remove('hidden');
+                resultcontent.classList.add('hidden');
+                errorMessage.classList.add('hidden');
+
+                try {
+                    const response = await fetch(API_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ query, context })
+                    });
+
+                    if (!response.ok) {
+                        const errData = await response.json();
+                        throw new Error(errData.error || `Error del servidor: ${response.status}`);
+                    }
+
+                    const data = await response.json();
+                    // Basic markdown-to-HTML conversion
+                    let html = data.result.replace(/\n/g, '<br>');
+                    html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+                    resultcontent.innerHTML = html;
+                    resultcontent.classList.remove('hidden');
+
+                } catch (error) {
+                    errorText.textContent = error.message;
+                    errorMessage.classList.remove('hidden');
+                } finally {
+                    spinner.classList.add('hidden');
+                }
+            }
+
+            // Event Listeners for each demo
+            document.getElementById('run-vigilancia').addEventListener('click', () => {
+                const query = document.getElementById('vigilancia-query').value;
+                if(query) callApi(`Busca y analiza la siguiente tesis o jurisprudencia: ${query}`);
             });
 
-            // Vigilancia Demo Simulation
-            const runVigilanciaBtn = document.getElementById('run-vigilancia');
-            const vigilanciaResultContainer = document.getElementById('vigilancia-result-container');
-            const vigilanciaSpinner = document.getElementById('vigilancia-spinner');
-            const vigilanciaResultContent = document.getElementById('vigilancia-result-content');
+            document.getElementById('run-strategy').addEventListener('click', () => {
+                const context = document.getElementById('strategy-context').value;
+                if(context) callApi('Realiza un análisis de estrategia legal tipo FODA para el siguiente caso:', context);
+            });
 
-            runVigilanciaBtn.addEventListener('click', () => {
-                vigilanciaResultContainer.style.display = 'block';
-                vigilanciaSpinner.style.display = 'flex';
-                vigilanciaResultContent.style.display = 'none';
-
-                setTimeout(() => {
-                    vigilanciaSpinner.style.display = 'none';
-                    vigilanciaResultContent.style.display = 'block';
-                }, 2500); // Simulate network delay
+            document.getElementById('run-document').addEventListener('click', () => {
+                const query = document.getElementById('document-query').value;
+                const context = document.getElementById('document-context').value;
+                if(query && context) callApi(`Genera un borrador del siguiente documento: ${query}`, context);
             });
             
             // Set initial active state for nav
             document.querySelector('.nav-item[data-demo="vigilancia"]').classList.add('bg-brand-blue-600');
-
         });
     </script>
 </body>
