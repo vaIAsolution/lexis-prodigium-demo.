@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LEXIS PRODIGIUM - Demo en Vivo</title>
+    <title>LEXIS PRODIGIUM - DEMO ACTUALIZADO</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,8 +13,8 @@
             theme: {
                 extend: {
                     colors: {
-                        'brand-blue': { '50': '#f0f8ff', '100': '#e0f0fe', '200': '#c2e3fd', '300': '#a3d5fc', '400': '#85c8fb', '500': '#67baf9', '600': '#48adf8', '700': '#3a9ef6', '800': '#2b8ff5', '900': '#1d81f3' },
-                        'brand-gray': { '50': '#f7fafc', '100': '#edf2f7', '200': '#e2e8f0', '300': '#cbd5e0', '400': '#a0aec0', '500': '#718096', '600': '#4a5568', '700': '#2d3748', '800': '#1a202c', '900': '#111827' }
+                        'brand-blue': { '50': '#e0f7fa', '100': '#b2ebf2', '200': '#80deea', '300': '#4dd0e1', '400': '#26c6da', '500': '#00bcd4', '600': '#00acc1', '700': '#0097a7', '800': '#00838f', '900': '#006064' },
+                        'brand-gray': { '50': '#f8f9fa', '100': '#e9ecef', '200': '#dee2e6', '300': '#ced4da', '400': '#adb5bd', '500': '#6c757d', '600': '#495057', '700': '#343a40', '800': '#212529', '900': '#1a1d20' }
                     },
                     fontFamily: { 'sans': ['Montserrat', 'sans-serif'], 'serif': ['Lora', 'serif'], 'body': ['Lato', 'sans-serif'] }
                 }
@@ -22,14 +22,18 @@
         }
     </script>
     <style>
-        .demo-section { display: none; } 
+        .demo-section { display: none; }
         .demo-section.active { display: block; }
         .prose { max-width: 100%; }
-        .prose h1, .prose h2, .prose h3 { font-family: 'Montserrat', sans-serif; color: #1a202c; }
-        .prose p { font-family: 'Lato', sans-serif; line-height: 1.7; }
+        .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 { font-family: 'Montserrat', sans-serif; color: #212529; margin-top: 1.5em; margin-bottom: 0.5em; }
+        .prose p { font-family: 'Lato', sans-serif; line-height: 1.7; margin-bottom: 1em; }
         .prose strong { font-weight: 700; }
-        .prose ul { list-style-type: disc; padding-left: 1.5rem; }
-        .prose li { margin-bottom: 0.5rem; }
+        .prose ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 1em; }
+        .prose ol { list-style-type: decimal; padding-left: 1.5rem; margin-bottom: 1em; }
+        .prose li { margin-bottom: 0.5em; }
+        .prose pre { background-color: #e9ecef; padding: 1em; border-radius: 0.5em; overflow-x: auto; }
+        .prose code { font-family: monospace; }
+        .prose blockquote { border-left: 4px solid #adb5bd; padding-left: 1em; color: #495057; font-style: italic; }
     </style>
 </head>
 <body class="bg-brand-gray-100 font-body text-brand-gray-800">
@@ -82,6 +86,9 @@
                         <p id="error-text"></p>
                     </div>
                     <div id="result-content" class="hidden bg-white p-6 rounded-lg shadow-lg prose"></div>
+                    <div id="download-buttons" class="mt-4 text-right hidden">
+                        <button id="download-txt-btn" class="bg-brand-blue-600 text-white font-bold py-2 px-4 rounded-md hover:bg-brand-blue-700 transition duration-300">Descargar TXT</button>
+                    </div>
                 </div>
 
                 <!-- Vigilancia Judicial Demo -->
@@ -130,6 +137,7 @@
                                     <label for="document-context" class="block text-sm font-bold text-brand-gray-700 mb-2">Proporcionar los detalles y datos clave:</label>
                                     <textarea id="document-context" rows="8" class="w-full px-3 py-2 border border-brand-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-blue-500" placeholder="Ej: Actor: María López. Demandado: Pedro Ramírez. Fecha de matrimonio: 15/03/2010. Domicilio conyugal: Av. Siempre Viva 123, CDMX. No hay hijos..."></textarea>
                                 </div>
+                                <div class="mb-4 text-sm text-brand-gray-600" id="usage-message"></div>
                                 <button id="run-document" class="w-full bg-brand-blue-600 text-white font-bold py-3 px-4 rounded-md hover:bg-brand-blue-700 transition duration-300 text-lg">Generar Documento</button>
                             </div>
                         </div>
@@ -154,6 +162,36 @@
             const resultcontent = document.getElementById('result-content');
             const errorMessage = document.getElementById('error-message');
             const errorText = document.getElementById('error-text');
+            const downloadButtons = document.getElementById('download-buttons');
+            const downloadTxtBtn = document.getElementById('download-txt-btn');
+            const runDocumentBtn = document.getElementById('run-document');
+            const usageMessage = document.getElementById('usage-message');
+
+            const MAX_USES = 5;
+            let usesRemaining = localStorage.getItem('lexisProdigiumUses');
+
+            if (usesRemaining === null) {
+                usesRemaining = MAX_USES;
+                localStorage.setItem('lexisProdigiumUses', usesRemaining);
+            } else {
+                usesRemaining = parseInt(usesRemaining);
+            }
+
+            function updateUsageMessage() {
+                if (usageMessage) { // Ensure usageMessage element exists
+                    if (usesRemaining <= 0) {
+                        usageMessage.textContent = `Límite de ${MAX_USES} usos alcanzado. Por favor, contacte a ventas para una demostración completa.`;
+                        runDocumentBtn.disabled = true;
+                        runDocumentBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                    } else {
+                        usageMessage.textContent = `Usos restantes: ${usesRemaining} de ${MAX_USES}.`;
+                        runDocumentBtn.disabled = false;
+                        runDocumentBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                    }
+                }
+            }
+
+            updateUsageMessage(); // Initial update
 
             // Navigation
             navItems.forEach(item => {
@@ -162,8 +200,24 @@
                     navItems.forEach(i => i.classList.remove('active', 'bg-brand-blue-600'));
                     this.classList.add('active', 'bg-brand-blue-600');
                     const demoId = this.getAttribute('data-demo');
-                    demoSections.forEach(section => section.id === 'demo-' + demoId ? section.classList.add('active') : section.classList.remove('active'));
-                    resultContainer.classList.add('hidden'); // Hide results on tab change
+                    demoSections.forEach(section => {
+                        if (section.id === 'demo-' + demoId) {
+                            section.classList.add('active');
+                            // Show result container and download buttons only for 'document' demo
+                            if (demoId === 'document') {
+                                resultContainer.classList.remove('hidden');
+                                downloadButtons.classList.remove('hidden');
+                            } else {
+                                resultContainer.classList.add('hidden');
+                                downloadButtons.classList.add('hidden');
+                            }
+                        } else {
+                            section.classList.remove('active');
+                        }
+                    });
+                    resultcontent.classList.add('hidden'); // Always hide content on tab change
+                    spinner.classList.add('hidden'); // Always hide spinner on tab change
+                    errorMessage.classList.add('hidden'); // Always hide error on tab change
                 });
             });
 
@@ -176,6 +230,7 @@
                 spinner.classList.remove('hidden');
                 resultcontent.classList.add('hidden');
                 errorMessage.classList.add('hidden');
+                downloadButtons.classList.add('hidden'); // Hide download buttons before new result
 
                 try {
                     const response = await fetch(API_URL, {
@@ -192,9 +247,10 @@
                     const data = await response.json();
                     // Basic markdown-to-HTML conversion
                     let html = data.result.replace(/\n/g, '<br>');
-                    html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+                    html = html.replace(/\*\*([^\*]+)\*\*/g, '<strong>$1</strong>');
                     resultcontent.innerHTML = html;
                     resultcontent.classList.remove('hidden');
+                    downloadButtons.classList.remove('hidden'); // Show download buttons after successful result
 
                 } catch (error) {
                     errorText.textContent = error.message;
@@ -204,6 +260,19 @@
                 }
             }
 
+            // Download TXT function
+            downloadTxtBtn.addEventListener('click', () => {
+                const textToSave = resultcontent.innerText; // Get plain text content
+                const blob = new Blob([textToSave], { type: 'text/plain' });
+                const a = document.createElement('a');
+                a.href = URL.createObjectURL(blob);
+                a.download = 'documento_generado.txt';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(a.href);
+            });
+
             // Event Listeners for each demo
             document.getElementById('run-vigilancia').addEventListener('click', () => {
                 const query = document.getElementById('vigilancia-query').value;
@@ -212,13 +281,25 @@
 
             document.getElementById('run-strategy').addEventListener('click', () => {
                 const context = document.getElementById('strategy-context').value;
-                if(context) callApi('Realiza un análisis de estrategia legal tipo FODA para el siguiente caso:', context);
+                if(context) callApi(`Realiza un análisis de estrategia legal tipo FODA para el siguiente caso: ${context}`, context);
             });
 
-            document.getElementById('run-document').addEventListener('click', () => {
+            runDocumentBtn.addEventListener('click', () => {
+                if (usesRemaining <= 0) {
+                    alert('Límite de usos alcanzado para el Generador de Escritos.');
+                    return;
+                }
+
                 const query = document.getElementById('document-query').value;
                 const context = document.getElementById('document-context').value;
-                if(query && context) callApi(`Genera un borrador del siguiente documento: ${query}`, context);
+                if(query && context) {
+                    callApi(`Genera un borrador del siguiente documento: ${query}. Detalles clave: ${context}`, context)
+                        .then(() => {
+                            usesRemaining--;
+                            localStorage.setItem('lexisProdigiumUses', usesRemaining);
+                            updateUsageMessage();
+                        });
+                }
             });
             
             // Set initial active state for nav
