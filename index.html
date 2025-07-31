@@ -161,6 +161,7 @@
             const resultContainer = document.getElementById('result-container');
             const spinner = document.getElementById('spinner');
             const resultcontent = document.getElementById('result-content');
+            const sourcesContainer = document.getElementById('sources-container');
             const errorMessage = document.getElementById('error-message');
             const errorText = document.getElementById('error-text');
             const downloadButtons = document.getElementById('download-buttons');
@@ -204,21 +205,15 @@
                     demoSections.forEach(section => {
                         if (section.id === 'demo-' + demoId) {
                             section.classList.add('active');
-                            // Show result container and download buttons only for 'document' demo
-                            if (demoId === 'document') {
-                                resultContainer.classList.remove('hidden');
-                                downloadButtons.classList.remove('hidden');
-                            } else {
-                                resultContainer.classList.add('hidden');
-                                downloadButtons.classList.add('hidden');
-                            }
                         } else {
                             section.classList.remove('active');
                         }
                     });
-                    resultcontent.classList.add('hidden'); // Always hide content on tab change
-                    spinner.classList.add('hidden'); // Always hide spinner on tab change
-                    errorMessage.classList.add('hidden'); // Always hide error on tab change
+                    resultContainer.classList.add('hidden');
+                    resultcontent.classList.add('hidden');
+                    sourcesContainer.classList.add('hidden');
+                    spinner.classList.add('hidden');
+                    errorMessage.classList.add('hidden');
                 });
             });
 
@@ -232,7 +227,7 @@
                 resultcontent.classList.add('hidden');
                 sourcesContainer.classList.add('hidden');
                 errorMessage.classList.add('hidden');
-                downloadButtons.classList.add('hidden'); // Hide download buttons before new result
+                downloadButtons.classList.add('hidden');
 
                 try {
                     const response = await fetch(API_URL, {
@@ -259,7 +254,6 @@
                         sourcesText = fullText.substring(sourcesIndex).trim();
                     }
 
-                    // Basic markdown-to-HTML conversion
                     let mainHtml = mainContentText.replace(/\n/g, '<br>').replace(/\*\*([^\*]+)\*\*/g, '<strong>$1</strong>');
                     resultcontent.innerHTML = mainHtml;
                     resultcontent.classList.remove('hidden');
@@ -270,7 +264,7 @@
                         sourcesContainer.classList.remove('hidden');
                     }
 
-                    downloadButtons.classList.remove('hidden'); // Show download buttons after successful result
+                    downloadButtons.classList.remove('hidden');
 
                 } catch (error) {
                     errorText.textContent = error.message;
@@ -329,4 +323,5 @@
         });
     </script>
 </body>
+<!-- Force update: 2025-07-31 12:30:00 -->
 </html>
