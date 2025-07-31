@@ -86,6 +86,7 @@
                         <p id="error-text"></p>
                     </div>
                     <div id="result-content" class="hidden bg-white p-6 rounded-lg shadow-lg prose"></div>
+                    <div id="sources-container" class="hidden bg-gray-100 p-6 mt-4 rounded-lg shadow-lg prose"></div>
                     <div id="download-buttons" class="mt-4 text-right hidden">
                         <button id="download-txt-btn" class="bg-brand-blue-600 text-white font-bold py-2 px-4 rounded-md hover:bg-brand-blue-700 transition duration-300">Descargar TXT</button>
                     </div>
@@ -229,6 +230,7 @@
                 resultContainer.classList.remove('hidden');
                 spinner.classList.remove('hidden');
                 resultcontent.classList.add('hidden');
+                sourcesContainer.classList.add('hidden');
                 errorMessage.classList.add('hidden');
                 downloadButtons.classList.add('hidden'); // Hide download buttons before new result
 
@@ -245,11 +247,29 @@
                     }
 
                     const data = await response.json();
+                    const fullText = data.result;
+                    const sourcesKeyword = 'Fuentes Consultadas';
+                    let mainContentText = fullText;
+                    let sourcesText = '';
+
+                    const sourcesIndex = fullText.indexOf(sourcesKeyword);
+
+                    if (sourcesIndex !== -1) {
+                        mainContentText = fullText.substring(0, sourcesIndex).trim();
+                        sourcesText = fullText.substring(sourcesIndex).trim();
+                    }
+
                     // Basic markdown-to-HTML conversion
-                    let html = data.result.replace(/\n/g, '<br>');
-                    html = html.replace(/\*\*([^\*]+)\*\*/g, '<strong>$1</strong>');
-                    resultcontent.innerHTML = html;
+                    let mainHtml = mainContentText.replace(/\n/g, '<br>').replace(/\*\*([^\*]+)\*\*/g, '<strong>$1</strong>');
+                    resultcontent.innerHTML = mainHtml;
                     resultcontent.classList.remove('hidden');
+
+                    if (sourcesText) {
+                        let sourcesHtml = sourcesText.replace(/\n/g, '<br>').replace(/\*\*([^\*]+)\*\*/g, '<strong>$1</strong>');
+                        sourcesContainer.innerHTML = sourcesHtml;
+                        sourcesContainer.classList.remove('hidden');
+                    }
+
                     downloadButtons.classList.remove('hidden'); // Show download buttons after successful result
 
                 } catch (error) {
@@ -262,11 +282,13 @@
 
             // Download TXT function
             downloadTxtBtn.addEventListener('click', () => {
-                const textToSave = resultcontent.innerText; // Get plain text content
-                const blob = new Blob([textToSave], { type: 'text/plain' });
+                const mainText = resultcontent.innerText;
+                const sourcesText = sourcesContainer.innerText;
+                const fullText = `${mainText}\n\n${sourcesText}`.trim();
+                const blob = new Blob([fullText], { type: 'text/plain' });
                 const a = document.createElement('a');
                 a.href = URL.createObjectURL(blob);
-                a.download = 'documento_generado.txt';
+                a.download = 'analisis_estrategico.txt';
                 document.body.appendChild(a);
                 a.click();
                 document.body.removeChild(a);
@@ -281,7 +303,7 @@
 
             document.getElementById('run-strategy').addEventListener('click', () => {
                 const context = document.getElementById('strategy-context').value;
-                if(context) callApi(`Realiza un análisis de estrategia legal tipo FODA para el siguiente caso: ${context}`, context);
+                if(context) callApi(`Realiza un análisis de estrategia legal tipo FODA para el siguiente caso: ${context}. Al final, DEBES incluir una sección titulada EXACTAMENTE 'Fuentes Consultadas' con una lista de las leyes, artículos, tesis jurisprudenciales, y doctrina utilizadas para fundamentar el análisis.`, context);
             });
 
             runDocumentBtn.addEventListener('click', () => {
