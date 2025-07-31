@@ -261,13 +261,18 @@
                         sourcesText = fullText.substring(sourcesIndex).trim();
                     }
 
-                    let mainHtml = mainContentText.replace(/\n/g, '<br>').replace(/\*\*([^\*]+)\*\*/g, '<strong>$1</strong>');
-                    resultcontent.innerHTML = mainHtml;
+                    function markdownToHtml(text) {
+                        return text
+                            .replace(/\n/g, '<br>')
+                            .replace(/\*\*([^\*]+)\*\*/g, '<strong>$1</strong>')
+                            .replace(/\[([^\]]+)\]\(([^\)]+)\)/g, '<a href="$2" target="_blank" class="text-brand-blue-600 hover:underline">$1</a>');
+                    }
+
+                    resultcontent.innerHTML = markdownToHtml(mainContentText);
                     resultcontent.classList.remove('hidden');
 
                     if (sourcesText) {
-                        let sourcesHtml = sourcesText.replace(/\n/g, '<br>').replace(/\*\*([^\*]+)\*\*/g, '<strong>$1</strong>');
-                        sourcesContainer.innerHTML = sourcesHtml;
+                        sourcesContainer.innerHTML = markdownToHtml(sourcesText);
                         sourcesContainer.classList.remove('hidden');
                     }
 
