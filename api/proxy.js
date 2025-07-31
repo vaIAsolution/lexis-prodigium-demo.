@@ -27,7 +27,8 @@ export default async (req, res) => {
       return res.status(400).json({ error: 'Query is required' });
     }
 
-    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+    // CAMBIO DE MODELO: Usando gemini-1.5-pro para mayor rigor y razonamiento.
+    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-pro' });
 
     let prompt = ``;
 
@@ -39,11 +40,12 @@ export default async (req, res) => {
         'Realiza un análisis FODA (Fortalezas, Oportunidades, Debilidades, Amenazas) para el siguiente caso.',
         '',
         '**REGLAS OBLIGATORIAS (DEBES CUMPLIRLAS AL 100%):**',
-        '1.  **ANÁLISIS APLICADO Y CUANTITATIVO:** Si el caso depende de datos específicos (gramos, plazos, porcentajes, etc.), **DEBES** investigar el dato exacto en la ley y citarlo directamente en el análisis FODA. **NO PUEDES** decir "revisar la ley", debes decir "la ley dice X".',
-        '2.  **FUENTES COMPLETAS Y ESPECIÍFICAS:** Debes citar **TODAS** las leyes y artículos relevantes, tanto sustantivos (ej. Ley del ISR, Código Civil) como adjetivos (ej. Código Fiscal de la Federación). Es **OBLIGATORIO** que cites los números de artículo específicos. **TIENES PROHIBIDO** usar frases como `(especificar artículos)` o `(investigar después)`.',
-        '3.  **ENLACES FUNCIONALES:** En la sección final **\'Fuentes Consultadas\'**, **DEBES** formatear cada fuente como un **hipervínculo en formato Markdown**. El enlace debe apuntar a una fuente oficial (preferentemente `diputados.gob.mx`).',
+        '1.  **PUNTO DE PARTIDA OBLIGATORIO PARA DROGAS:** Si el caso involucra posesión de narcóticos, tu primer paso **siempre** es analizar la tabla del **Artículo 479 de la Ley General de Salud**. Debes comparar las cantidades del caso con las de la tabla y mencionarlo explícitamente en el análisis FODA.',
+        '2.  **ANÁLISIS APLICADO Y CUANTITATIVO:** Si el caso depende de datos específicos (gramos, plazos, porcentajes), **DEBES** investigar el dato exacto en la ley y citarlo directamente en el análisis FODA. **NO PUEDES** decir "revisar la ley", debes decir "la ley dice X".',
+        '3.  **FUENTES COMPLETAS Y ESPECIÍFICAS:** Debes citar **TODAS** las leyes y artículos relevantes, tanto sustantivos (ej. Ley del ISR, Código Civil, Ley General de Salud) como adjetivos (ej. Código Fiscal de la Federación, CNPP). Es **OBLIGATORIO** que cites los números de artículo específicos. **TIENES PROHIBIDO** usar frases como `(especificar artículos)` o `(investigar después)`.',
+        '4.  **ENLACES FUNCIONALES:** En la sección final **'Fuentes Consultadas'**, **DEBES** formatear cada fuente como un **hipervínculo en formato Markdown**. El enlace debe apuntar a una fuente oficial (preferentemente `diputados.gob.mx`).',
         '    *   **Formato Correcto:** `[Ley del Impuesto Sobre la Renta, Artículo 91](https://www.diputados.gob.mx/LeyesBiblio/pdf/LISR.pdf)`',
-        '4.  **AUTOCORRECCIÓN FINAL:** Antes de generar la respuesta final, revisa tu propio trabajo. ¿Cumpliste con las 3 reglas anteriores? ¿Citaste los datos? ¿Incluiste TODOS los artículos relevantes? ¿Creaste los enlaces? Si no es así, corrige tu borrador antes de presentarlo.',
+        '5.  **AUTOCORRECCIÓN FINAL:** Antes de generar la respuesta final, revisa tu propio trabajo. ¿Cumpliste con las 4 reglas anteriores? ¿Citaste los datos de la LGS si aplicaba? ¿Incluiste TODOS los artículos relevantes? ¿Creaste los enlaces? Si no es así, corrige tu borrador antes de presentarlo.',
         '',
         `**CASO A ANALIZAR:** ${context}`
       ];
