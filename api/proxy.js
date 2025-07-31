@@ -35,16 +35,16 @@ export default async (req, res) => {
       prompt = `Actúa como un experto en jurisprudencia mexicana. Analiza la siguiente solicitud y proporciona un resumen claro, conciso y relevante de la tesis o jurisprudencia, incluyendo su registro, fecha de publicación, hechos relevantes, criterio jurídico y su impacto práctico en el derecho mexicano. Utiliza un formato profesional y fácil de leer, con encabezados y párrafos bien definidos. ${query}`;
     } else if (query.startsWith("Realiza un análisis de estrategia legal tipo FODA para el siguiente caso:")) {
             const promptLines = [
-        'Actúa como un estratega legal experto y un asistente de investigación legal de élite en México. Tu tarea es realizar un análisis FODA (Fortalezas, Oportunidades, Debilidades, Amenazas) para el siguiente caso. Tu análisis debe ser **profundo, aplicado y accionable**.',
+        'Eres un Asistente Legal de IA de élite para un prestigioso bufete de abogados en México. Tu función principal es **ejecutar la investigación, no solo sugerirla**. Debes ser preciso, rápido y accionable.',
+        'Realiza un análisis FODA (Fortalezas, Oportunidades, Debilidades, Amenazas) para el siguiente caso.',
         '',
-        '**Instrucciones Clave:**',
-        '1.  **Análisis Aplicado:** Cuando identifiques una fortaleza o debilidad basada en un dato legal (ej. una cantidad, un plazo, un porcentaje), no te limites a mencionarlo. **DEBES investigar y citar el dato exacto** en tu análisis. Por ejemplo, en lugar de decir \'revisar las cantidades permitidas\', debes decir \'la cantidad de cocaína (X gramos) es inferior al límite de Y gramos establecido en el Artículo Z de la Ley General de Salud, lo que debilita el caso federal\'.',
-        '2.  **Fuentes Específicas y Enlazadas:** Al final, en la sección **\'Fuentes Consultadas\'**, no listarás solo la ley. Debes:',
-        '    *   Listar cada ley con los **números de artículo específicos** que fundamentan tu análisis.',
-        '    *   Formatear cada fuente como un **hipervínculo en formato Markdown**. El enlace debe apuntar a una fuente oficial, preferentemente al PDF de la ley en `diputados.gob.mx` o el sitio oficial correspondiente.',
-        '    *   Ejemplo de formato: `[Ley General de Salud, Artículos 234, 235 y 479](https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf)`.',
+        '**REGLAS OBLIGATORIAS:**',
+        '1.  **ANÁLISIS APLICADO Y CUANTITATIVO:** Si el caso depende de datos específicos (gramos, plazos, porcentajes, etc.), **DEBES** investigar el dato exacto en la ley y citarlo directamente en el análisis FODA. **NO PUEDES** decir "revisar la ley", debes decir "la ley dice X".',
+        '2.  **FUENTES ESPECÍFICAS Y ENLAZADAS:** En la sección final **\'Fuentes Consultadas\'**, es **OBLIGATORIO** que cites los números de artículo específicos. **TIENES PROHIBIDO** usar frases como `(especificar artículos)` o `(investigar después)`. Debes formatear cada fuente como un hipervínculo Markdown apuntando a una fuente oficial (preferentemente `diputados.gob.mx`).',
+        '    *   **Formato Correcto:** `[Ley General de Salud, Artículos 478, 479](https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf)`',
+        '    *   **Formato Incorrecto (PROHIBIDO):** `Ley General de Salud (investigar artículos)`',
         '',
-        `**El caso a analizar es:** ${context}`
+        `**CASO A ANALIZAR:** ${context}`
       ];
       prompt = promptLines.join('\n');;
     } else if (query.startsWith("Genera un borrador del siguiente documento:")) {
