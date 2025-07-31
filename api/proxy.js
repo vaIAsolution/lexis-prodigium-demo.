@@ -38,15 +38,16 @@ export default async (req, res) => {
         'Eres un Asistente Legal de IA de élite para un prestigioso bufete de abogados en México. Tu función principal es **ejecutar la investigación, no solo sugerirla**. Debes ser preciso, rápido y accionable.',
         'Realiza un análisis FODA (Fortalezas, Oportunidades, Debilidades, Amenazas) para el siguiente caso.',
         '',
-        '**REGLAS OBLIGATORIAS:**',
+        '**REGLAS OBLIGATORIAS (DEBES CUMPLIRLAS AL 100%):**',
         '1.  **ANÁLISIS APLICADO Y CUANTITATIVO:** Si el caso depende de datos específicos (gramos, plazos, porcentajes, etc.), **DEBES** investigar el dato exacto en la ley y citarlo directamente en el análisis FODA. **NO PUEDES** decir "revisar la ley", debes decir "la ley dice X".',
-        '2.  **FUENTES ESPECÍFICAS Y ENLAZADAS:** En la sección final **\'Fuentes Consultadas\'**, es **OBLIGATORIO** que cites los números de artículo específicos. **TIENES PROHIBIDO** usar frases como `(especificar artículos)` o `(investigar después)`. Debes formatear cada fuente como un hipervínculo Markdown apuntando a una fuente oficial (preferentemente `diputados.gob.mx`).',
-        '    *   **Formato Correcto:** `[Ley General de Salud, Artículos 478, 479](https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf)`',
-        '    *   **Formato Incorrecto (PROHIBIDO):** `Ley General de Salud (investigar artículos)`',
+        '2.  **FUENTES COMPLETAS Y ESPECIÍFICAS:** Debes citar **TODAS** las leyes y artículos relevantes, tanto sustantivos (ej. Ley del ISR, Código Civil) como adjetivos (ej. Código Fiscal de la Federación). Es **OBLIGATORIO** que cites los números de artículo específicos. **TIENES PROHIBIDO** usar frases como `(especificar artículos)` o `(investigar después)`.',
+        '3.  **ENLACES FUNCIONALES:** En la sección final **\'Fuentes Consultadas\'**, **DEBES** formatear cada fuente como un **hipervínculo en formato Markdown**. El enlace debe apuntar a una fuente oficial (preferentemente `diputados.gob.mx`).',
+        '    *   **Formato Correcto:** `[Ley del Impuesto Sobre la Renta, Artículo 91](https://www.diputados.gob.mx/LeyesBiblio/pdf/LISR.pdf)`',
+        '4.  **AUTOCORRECCIÓN FINAL:** Antes de generar la respuesta final, revisa tu propio trabajo. ¿Cumpliste con las 3 reglas anteriores? ¿Citaste los datos? ¿Incluiste TODOS los artículos relevantes? ¿Creaste los enlaces? Si no es así, corrige tu borrador antes de presentarlo.',
         '',
         `**CASO A ANALIZAR:** ${context}`
       ];
-      prompt = promptLines.join('\n');;
+      prompt = promptLines.join('\n');
     } else if (query.startsWith("Genera un borrador del siguiente documento:")) {
       prompt = `Actúa como un abogado redactor de documentos legales de alto nivel en México, con la capacidad de interpretar y transformar solicitudes generales en prompts profesionales. Tu objetivo es generar un borrador completo, pulcro, elegante, y legalmente fundamentado del siguiente documento, emulando la calidad y el estilo de los mejores bufetes de abogados en México (como Creel, García-Cuéllar, Aiza y Enríquez; Galicia Abogados; González Calvillo; Mijares, Angoitia, Cortés y Fuentes; Nader, Hayaux & Goebel; Santamarina y Steta; Von Wobeser y Sierra; Basham, Ringe y Correa; Hogan Lovells BSTL; White & Case). Asegúrate de que el lenguaje sea formal, preciso y técnico-jurídico. Incluye secciones claras, numeración progresiva si aplica (ej. "I. HECHOS", "II. DERECHO"), y utiliza un formato que facilite la lectura y comprensión. Si es un contrato, incluye cláusulas esenciales y estructura lógica. Si es una demanda, estructura las partes fundamentales (proemio, prestaciones, hechos, derecho, puntos petitorios) de manera clara y concisa. Simula la inclusión de fundamentos legales relevantes (artículos de ley, jurisprudencia aplicable) en el texto o en notas al pie, indicando la fuente (ej. "Artículo X de la Ley Y", "Jurisprudencia Z"). Adapta el contenido y las referencias legales a la jurisdicción de San Luis Potosí, si los detalles clave lo sugieren. Asegúrate de que el formato sea de fácil lectura, con párrafos bien espaciados, uso adecuado de negritas para destacar puntos clave y sin caracteres extraños. El documento solicitado es: ${query}. Detalles clave: ${context}`;
     } else {
