@@ -57,6 +57,9 @@
                     Generador de Escritos
                 </a>
             </nav>
+            <div class="mt-auto p-4 text-center text-sm text-brand-gray-400" id="usage-container">
+                <div id="usage-message"></div>
+            </div>
         </aside>
 
         <!-- Main Content -->
@@ -138,7 +141,7 @@
                                     <label for="document-context" class="block text-sm font-bold text-brand-gray-700 mb-2">Proporcionar los detalles y datos clave:</label>
                                     <textarea id="document-context" rows="8" class="w-full px-3 py-2 border border-brand-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-blue-500" placeholder="Ej: Actor: María López. Demandado: Pedro Ramírez. Fecha de matrimonio: 15/03/2010. Domicilio conyugal: Av. Siempre Viva 123, CDMX. No hay hijos..."></textarea>
                                 </div>
-                                <div class="mb-4 text-sm text-brand-gray-600" id="usage-message"></div>
+                                
                                 <button id="run-document" class="w-full bg-brand-blue-600 text-white font-bold py-3 px-4 rounded-md hover:bg-brand-blue-700 transition duration-300 text-lg">Generar Documento</button>
                             </div>
                         </div>
@@ -166,6 +169,8 @@
             const errorText = document.getElementById('error-text');
             const downloadButtons = document.getElementById('download-buttons');
             const downloadTxtBtn = document.getElementById('download-txt-btn');
+            const runVigilanciaBtn = document.getElementById('run-vigilancia');
+            const runStrategyBtn = document.getElementById('run-strategy');
             const runDocumentBtn = document.getElementById('run-document');
             const usageMessage = document.getElementById('usage-message');
 
@@ -180,16 +185,18 @@
             }
 
             function updateUsageMessage() {
-                if (usageMessage) { // Ensure usageMessage element exists
-                    if (usesRemaining <= 0) {
-                        usageMessage.textContent = `Límite de ${MAX_USES} usos alcanzado. Por favor, contacte a ventas para una demostración completa.`;
-                        runDocumentBtn.disabled = true;
-                        runDocumentBtn.classList.add('opacity-50', 'cursor-not-allowed');
-                    } else {
-                        usageMessage.textContent = `Usos restantes: ${usesRemaining} de ${MAX_USES}.`;
-                        runDocumentBtn.disabled = false;
-                        runDocumentBtn.classList.remove('opacity-50', 'cursor-not-allowed');
-                    }
+                if (usesRemaining <= 0) {
+                    usageMessage.innerHTML = `<p class="font-bold">Límite de ${MAX_USES} usos alcanzado.</p><p>Contacte a ventas para una demo completa.</p>`;
+                    runVigilanciaBtn.disabled = true;
+                    runStrategyBtn.disabled = true;
+                    runDocumentBtn.disabled = true;
+                    [runVigilanciaBtn, runStrategyBtn, runDocumentBtn].forEach(btn => btn.classList.add('opacity-50', 'cursor-not-allowed'));
+                } else {
+                    usageMessage.textContent = `Usos restantes: ${usesRemaining} de ${MAX_USES}.`;
+                    runVigilanciaBtn.disabled = false;
+                    runStrategyBtn.disabled = false;
+                    runDocumentBtn.disabled = false;
+                     [runVigilanciaBtn, runStrategyBtn, runDocumentBtn].forEach(btn => btn.classList.remove('opacity-50', 'cursor-not-allowed'));
                 }
             }
 
@@ -290,31 +297,21 @@
             });
 
             // Event Listeners for each demo
-            document.getElementById('run-vigilancia').addEventListener('click', () => {
+            runVigilanciaBtn.addEventListener('click', () => {
                 const query = document.getElementById('vigilancia-query').value;
                 if(query) callApi(`Busca y analiza la siguiente tesis o jurisprudencia: ${query}`);
             });
 
-            document.getElementById('run-strategy').addEventListener('click', () => {
+            runStrategyBtn.addEventListener('click', () => {
                 const context = document.getElementById('strategy-context').value;
                 if(context) callApi(`Realiza un análisis de estrategia legal tipo FODA para el siguiente caso: ${context}. Al final, DEBES incluir una sección titulada EXACTAMENTE 'Fuentes Consultadas' con una lista de las leyes, artículos, tesis jurisprudenciales, y doctrina utilizadas para fundamentar el análisis.`, context);
             });
 
             runDocumentBtn.addEventListener('click', () => {
-                if (usesRemaining <= 0) {
-                    alert('Límite de usos alcanzado para el Generador de Escritos.');
-                    return;
-                }
-
                 const query = document.getElementById('document-query').value;
                 const context = document.getElementById('document-context').value;
                 if(query && context) {
-                    callApi(`Genera un borrador del siguiente documento: ${query}. Detalles clave: ${context}`, context)
-                        .then(() => {
-                            usesRemaining--;
-                            localStorage.setItem('lexisProdigiumUses', usesRemaining);
-                            updateUsageMessage();
-                        });
+                    callApi(`Genera un borrador del siguiente documento: ${query}. Detalles clave: ${context}`, context);
                 }
             });
             
